@@ -1,15 +1,16 @@
 /*
 KWin Script Maximized Window Gap
+(C) 2024 Abilash Venu <abimagnus@gmail.com>
 (C) 2022 Murat Çileli <murat.cileli@gmail.com>
 (C) 2021 Natalie Clarius <natalie_clarius@yahoo.de>
 GNU General Public License v3.0
 */
 
 const config = {
-    gapTop: readConfig("gapTop", 12),
-    gapLeft: readConfig("gapLeft", 12),
-    gapRight: readConfig("gapRight", 12),
-    gapBottom: readConfig("gapBottom", 12),
+    gapTop: readConfig("gapTop", 2),
+    gapLeft: readConfig("gapLeft", 2),
+    gapRight: readConfig("gapRight", 2),
+    gapBottom: readConfig("gapBottom", 27),
     offsetTop: readConfig("offsetTop", 0),
     offsetLeft: readConfig("offsetLeft", 0),
     offsetRight: readConfig("offsetRight", 0),
@@ -22,8 +23,8 @@ const config = {
 
 var block = false;
 
-workspace.clientList().forEach(client => onAdded(client));
-workspace.clientAdded.connect(onAdded);
+workspace.windowList().forEach(client => onAdded(client));
+workspace.windowAdded.connect(onAdded);
 
 function onAdded(client) {
     applyGaps(client);
@@ -31,28 +32,31 @@ function onAdded(client) {
 }
 
 function onRegeometrized(client) {
-    client.frameGeometryChanged.connect((client) => {
+    client.frameGeometryChanged.connect(() => {
         applyGaps(client)
     });
-    client.fullScreenChanged.connect((client) => {
+    client.fullScreenChanged.connect(() => {
         applyGaps(client);
     });
-    client.clientMaximizedStateChanged.connect((client) => {
+    client.maximizedChanged.connect(() => {
         applyGaps(client);
     });
-    client.clientUnminimized.connect((client) => {
+    client.minimizedChanged.connect(() => {
         applyGaps(client);
     });
-    client.screenChanged.connect((client) => {
+    client.quickTileModeChanged.connect(() => {
         applyGaps(client);
     });
-    client.desktopChanged.connect((client) => {
+    client.desktopsChanged.connect(() => {
+        applyGaps(client);
+    });
+    client.activitiesChanged.connect(() => {
         applyGaps(client);
     });
 }
 
 function applyGapsAll() {
-    workspace.clientList().forEach(client => applyGaps(client));
+    workspace.windowList().forEach(client => applyGaps(client));
 }
 
 onRelayouted();
@@ -61,16 +65,13 @@ function onRelayouted() {
     workspace.currentDesktopChanged.connect(() => {
         applyGapsAll();
     });
-    workspace.desktopPresenceChanged.connect(() => {
+    workspace.desktopLayoutChanged.connect(() => {
         applyGapsAll();
     });
-    workspace.numberDesktopsChanged.connect(() => {
+    workspace.desktopsChanged.connect(() => {
         applyGapsAll();
     });
-    workspace.numberScreensChanged.connect(() => {
-        applyGapsAll();
-    });
-    workspace.screenResized.connect(() => {
+    workspace.screensChanged.connect(() => {
         applyGapsAll();
     });
     workspace.currentActivityChanged.connect(() => {
@@ -85,7 +86,7 @@ function onRelayouted() {
     workspace.virtualScreenGeometryChanged.connect(() => {
         applyGapsAll();
     });
-    workspace.clientAdded.connect((client) => {
+    workspace.windowAdded.connect((client) => {
         if (client.dock) {
             applyGapsAll();
         }
@@ -101,7 +102,7 @@ function applyGaps(client) {
 
 function applyGapsArea(client) {
     let grid = getGrid(client);
-    let win = client.geometry;
+    let win = client.frameGeometry;
 
     for (let i = 0; i < Object.keys(grid.left).length; i++) {
         let pos = Object.keys(grid.left)[i];

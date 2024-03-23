@@ -1,6 +1,8 @@
 {
+    "KPackageStructure": "KWin/Script",
     "KPlugin": {
-        "Name": "Maximized Window Gap",
+        "Name": "Maximized Window Gaps",
+        "Category": "Scripts",
         "Description": "Adds space around maximized windows.",
         "Icon": "preferences-system-windows",
 
@@ -8,20 +10,25 @@
             {
                 "Email": "murat.cileli@gmail.com",
                 "Name": "Murat Çileli"
+            },
+
+            {
+                "Email": "abimagnus@gmail.com",
+                "Name": "abimagnus"
             }
         ],
-        "Id": "maximized-window-gap",
+        "Id": "maximized-window-gaps",
         "ServiceTypes": [
             "KWin/Script",
             "KCModule"
         ],
-        "Version": "1.0",
+        "Version": "2.0",
         "Licsense": "GPLv3",
         "Website": "https://store.kde.org/p/1695214/"
     },
     "X-Plasma-API": "javascript",
     "X-Plasma-MainScript": "code/main.js",
     "X-KDE-ConfigModule": "kwin/effects/configs/kcm_kwin4_genericscripted",
-    "X-KDE-PluginKeyword": "maximized-window-gap"
+    "X-KDE-PluginKeyword": "maximized-window-gaps"
 }
 
