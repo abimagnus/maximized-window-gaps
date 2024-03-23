@@ -1,4 +1,4 @@
-# Maximized Window Gap
+# Maximized Window Gaps
 
 >*This is a reduced version of **[Window Gaps](https://github.com/nclarius/tile-gaps)** script by **Natalie Clarius**. All credit goes to her.*
 
@@ -21,7 +21,7 @@ Extension for KDE's window manager to add space around maximized windows. The si
 
 ```bash
 git clone https://github.com/abimagnus/maximized-window-gaps.git
-kpackagetool5 --type=KWin/Script -i maximized-window-gaps
+kpackagetool6 --type=KWin/Script -i maximized-window-gaps
 qdbus org.kde.KWin /KWin reconfigure
 ```
 
