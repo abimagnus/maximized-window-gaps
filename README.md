@@ -10,7 +10,7 @@ Extension for KDE's window manager to add space around maximized windows. The si
 
 ### Dependencies
 
-`kwin` version ≥ 5.21.
+`kwin` version ≥ 6.0.2.
 
 ### Method 1: via graphical interface
 
@@ -20,8 +20,8 @@ Extension for KDE's window manager to add space around maximized windows. The si
 ### Method 2: via command line
 
 ```bash
-git clone https://github.com/murat-cileli/maximized-window-gap.git
-kpackagetool5 --type=KWin/Script -i maximized-window-gap
+git clone https://github.com/abimagnus/maximized-window-gaps.git
+kpackagetool5 --type=KWin/Script -i maximized-window-gaps
 qdbus org.kde.KWin /KWin reconfigure
 ```
 
@@ -35,5 +35,7 @@ If the configuration button is missing (this is due to a central limitation with
 
 ````bash
 mkdir -p ~/.local/share/kservices5
-ln -sf ~/.local/share/kwin/scripts/maximized-window-gap/metadata.desktop ~/.local/share/kservices5/maximized-window-gap.desktop
+ln -sf ~/.local/share/kwin/scripts/maximized-window-gaps/metadata.desktop ~/.local/share/kservices5/maximized-window-gaps.desktop
 ````
+## Floating Panel
+If you need the floating panel when maximizing windows set the bottom gap 27px
